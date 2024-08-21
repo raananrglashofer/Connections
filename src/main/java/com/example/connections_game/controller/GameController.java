@@ -1,5 +1,6 @@
 package com.example.connections_game.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.connections_game.Connections.*;
@@ -11,8 +12,8 @@ import java.util.*;
 @RequestMapping("/game")
 public class GameController {
 
-    private Game game;
-
+    private final Game game;
+    @Autowired
     public GameController() {
         this.game = new Game(); // Initialize the game
     }

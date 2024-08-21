@@ -1,7 +1,6 @@
 package com.example.connections_game.Connections;
 
 import java.time.LocalDateTime;
-
 public class Player {
     private String name;
     private long startTime;

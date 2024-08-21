@@ -6,11 +6,14 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-
+import io.github.cdimascio.dotenv.Dotenv;
+import org.springframework.stereotype.Component;
+@Component
 public class PuzzleGenerator {
     // Constants for the API URL and the API key
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
-    private static final String API_KEY = System.getenv("API_KEY");
+    private static final Dotenv dotenv = Dotenv.configure().load();
+    private static final String API_KEY = dotenv.get("API_KEY");
 
     public Puzzle fetchNewPuzzle() {
         // Use a try-with-resources statement to ensure the HTTP client is closed
@@ -68,16 +71,16 @@ public class PuzzleGenerator {
         }
     }
 
-//    public static void main(String[] args) {
-//        PuzzleGenerator generator = new PuzzleGenerator();
-//        Puzzle puzzle = generator.fetchNewPuzzle();
-//        if (puzzle != null) {
-//            System.out.println("Puzzle fetched successfully!");
-//            System.out.println("Words: " + puzzle.getWords());
-//            System.out.println("Hints: " + puzzle.getHints());
-//        } else {
-//            System.out.println("Failed to fetch puzzle.");
-//        }
-//    }
+    public static void main(String[] args) {
+        PuzzleGenerator generator = new PuzzleGenerator();
+        Puzzle puzzle = generator.fetchNewPuzzle();
+        if (puzzle != null) {
+            System.out.println("Puzzle fetched successfully!");
+            System.out.println("Words: " + puzzle.getWords());
+            System.out.println("Hints: " + puzzle.getHints());
+        } else {
+            System.out.println("Failed to fetch puzzle.");
+        }
+    }
 
 }

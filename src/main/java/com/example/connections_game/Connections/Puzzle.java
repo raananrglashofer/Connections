@@ -22,6 +22,7 @@ public class Puzzle {
                 if (!solvedConnections.contains(connection)) {
                     solvedConnections.add(connection);
                     getRidOfWords(guess);
+                    System.out.println(this.words);
                     return connection.getConnection();
                 }
             }
@@ -35,7 +36,7 @@ public class Puzzle {
 
     public String getHint(){
         if(this.hints.isEmpty()){
-            throw new IllegalArgumentException("All hints have been given");
+            return "All hints have been given";
         }
         String hint = this.hints.get(0);
         hints.remove(hint);
