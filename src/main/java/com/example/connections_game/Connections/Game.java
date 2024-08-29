@@ -9,6 +9,7 @@ public class Game {
     private Set<Puzzle> cachedPuzzles;
     private Player player;
     private PuzzleGenerator puzzleGenerator;
+    private boolean gameOver = false;
 
     public Game(){
         //this.player = new Player(playerName);
@@ -17,6 +18,11 @@ public class Game {
         this.puzzleGenerator = new PuzzleGenerator();
         startNewGame();
     }
+
+    public boolean isGameOver(){
+        return this.gameOver;
+    }
+
 
     public void startNewGame(){
         Puzzle newPuzzle = puzzleGenerator.fetchNewPuzzle();
@@ -34,7 +40,10 @@ public class Game {
             lowerCaseGuess.add(word.toLowerCase());
         }
         if (guess.size() != 4) {
-            throw new IllegalArgumentException("Guess must be four words" + "\n" + "Guess Again");
+            // I want to return a seperate message though
+            //throw new IllegalArgumentException("Guess must be four words" + "\n" + "Guess Again");
+            getPlayer().decreaseLife();
+            return false;
         }
         String connection = currentPuzzle.isCorrect(lowerCaseGuess);
         if (connection != null) {
@@ -55,7 +64,7 @@ public class Game {
         StringBuilder str = new StringBuilder("Connection - " + connection);
         if (currentPuzzle.isSolved()) {
             str.append("Congratulations! You've solved the puzzle! " + "\n" + "Do you want to play again?");
-            playAgain();
+            gameOver();
         } else {
             str.append("Keep going! Words left: " + currentPuzzle.getWords());
         }
@@ -71,13 +80,13 @@ public class Game {
             for(Connection connect : this.currentPuzzle.getConnections()){
                 str.append(connect.getWords() + " - " + connect.getConnection() + "\n");
             }
-            playAgain();
+            gameOver();
         }
         str.append("Incorrect - Guess Again" + " You have " + this.player.getLives() + " lives left");
         return str.toString();
     }
-
-    private boolean playAgain() {
+    // need to figure out logic for this and get user input
+    private boolean gameOver() {
         return true;
     }
 

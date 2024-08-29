@@ -1,43 +1,60 @@
 package com.example.connections_game.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.example.connections_game.Connections.*;
 import com.example.connections_game.dto.*;
 
 import java.util.*;
 
-@RestController
-@RequestMapping("/game")
+@Controller
 public class GameController {
 
     private final Game game;
-    @Autowired
-    public GameController() {
-        this.game = new Game(); // Initialize the game
+
+    public GameController(Game game) {
+        this.game = game;
     }
 
-    @PostMapping("/start")
-    public ResponseEntity<GameState> startGame() {
+    @GetMapping("/")
+    public String welcomePage() {
+        return "start";
+    }
+
+    @GetMapping("/game/start")
+    public String startGame(Model model) {
         game.startNewGame();
-        return ResponseEntity.ok(new GameState(game));
+        model.addAttribute("gameState", new GameState(game));
+        return "game";  // Return the name of the game.html template
     }
 
-    @PostMapping("/guess")
-    public ResponseEntity<GuessResult> makeGuess(@RequestBody Set<String> guess) {
+
+
+    @PostMapping("/game/guess")
+    public String makeGuess(@RequestParam("guess") String guessInput, Model model) {
+        Set<String> guess = new HashSet<>(Arrays.asList(guessInput.split(",")));
         boolean correct = game.guess(guess);
-        return ResponseEntity.ok(new GuessResult(correct, new GameState(game)));
+        GameState gameState = new GameState(game);
+        model.addAttribute("correct", correct);
+        model.addAttribute("gameState", gameState);
+        return "game";
     }
 
-    @GetMapping("/hint")
-    public ResponseEntity<HintResponse> getHint() {
+    @PostMapping("game/hint")
+    public String getHint(Model model) {
         String hint = game.getHint();
-        return ResponseEntity.ok(new HintResponse(hint, new GameState(game)));
+        model.addAttribute("hint", hint);
+        model.addAttribute("gameState", new GameState(game));
+        return "game";
     }
 
-    @GetMapping("/state")
-    public ResponseEntity<GameState> getGameState() {
-        return ResponseEntity.ok(new GameState(game));
+    @GetMapping("/game/state")
+    public String getGameState(Model model) {
+        model.addAttribute("gameState", new GameState(game));
+        return "game";
     }
 }

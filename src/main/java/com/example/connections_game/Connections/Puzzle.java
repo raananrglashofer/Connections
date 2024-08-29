@@ -7,6 +7,7 @@ public class Puzzle {
     // hints are not given by difficulty for now - given out randomly
     private List<String> hints;
     private Set<Connection> solvedConnections = new HashSet<>();
+    private Set<String> hintsGiven = new HashSet<>();
     public Puzzle(){
 
     }
@@ -22,7 +23,6 @@ public class Puzzle {
                 if (!solvedConnections.contains(connection)) {
                     solvedConnections.add(connection);
                     getRidOfWords(guess);
-                    System.out.println(this.words);
                     return connection.getConnection();
                 }
             }
@@ -40,6 +40,7 @@ public class Puzzle {
         }
         String hint = this.hints.get(0);
         hints.remove(hint);
+        hintsGiven.add(hint);
         return hint;
     }
     public Set<String> getWords(){
@@ -47,6 +48,9 @@ public class Puzzle {
     }
     public List<String> getHints(){
         return this.hints;
+    }
+    public Set<String> getHintsGiven(){
+        return this.hintsGiven;
     }
 
     private void getRidOfWords(Set<String> guess){
