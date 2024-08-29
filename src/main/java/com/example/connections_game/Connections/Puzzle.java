@@ -88,4 +88,8 @@ public class Puzzle {
     public List<Connection> getConnections() {
         return connections;
     }
+
+    public Set<Connection> getSolvedConnections(){
+        return this.solvedConnections;
+    }
 }

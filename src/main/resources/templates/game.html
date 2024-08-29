@@ -17,11 +17,16 @@
     <li th:each="word : ${gameState.wordsLeft}" th:text="${word}"></li>
 </ul>
 
+<p id="connectionText">Connections: </p>
+<ul>
+    <li th:each="connection : ${gameState.solvedConnections}" th:text="${connection}"></li>
+</ul>
+
 <p>Lives Left: <span th:text="${gameState.livesLeft}"></span></p>
 <p>Hints Left: <span th:text="${gameState.hintsLeft}"></span></p>
 
 <form action="/game/guess" method="post">
-    <label for="guess">Enter Your Guess (4 words separated by commas):</label>
+    <label for="guess">Enter Your Guess (4 words separated by spaces):</label>
     <input type="text" id="guess" name="guess" required>
     <button type="submit">Submit Guess</button>
 </form>

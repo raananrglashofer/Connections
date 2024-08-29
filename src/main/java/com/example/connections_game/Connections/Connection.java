@@ -29,4 +29,10 @@ public class Connection {
     public void setConnection(String connection) {
         this.connection = connection;
     }
+
+    @Override
+    public String toString() {
+        return "Connection = " + connection +
+                " --> words = " + words;
+    }
 }

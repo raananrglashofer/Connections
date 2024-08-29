@@ -70,17 +70,4 @@ public class PuzzleGenerator {
             return null;
         }
     }
-
-    public static void main(String[] args) {
-        PuzzleGenerator generator = new PuzzleGenerator();
-        Puzzle puzzle = generator.fetchNewPuzzle();
-        if (puzzle != null) {
-            System.out.println("Puzzle fetched successfully!");
-            System.out.println("Words: " + puzzle.getWords());
-            System.out.println("Hints: " + puzzle.getHints());
-        } else {
-            System.out.println("Failed to fetch puzzle.");
-        }
-    }
-
 }

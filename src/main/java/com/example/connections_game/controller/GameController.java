@@ -25,7 +25,7 @@ public class GameController {
         return "start";
     }
 
-    @GetMapping("/game/start")
+    @PostMapping("/game/start")
     public String startGame(Model model) {
         game.startNewGame();
         model.addAttribute("gameState", new GameState(game));
@@ -36,11 +36,15 @@ public class GameController {
 
     @PostMapping("/game/guess")
     public String makeGuess(@RequestParam("guess") String guessInput, Model model) {
-        Set<String> guess = new HashSet<>(Arrays.asList(guessInput.split(",")));
+        Set<String> guess = new HashSet<>(Arrays.asList(guessInput.split(" ")));
         boolean correct = game.guess(guess);
         GameState gameState = new GameState(game);
         model.addAttribute("correct", correct);
         model.addAttribute("gameState", gameState);
+        System.out.println(gameState.isGameOver());
+        if (gameState.isGameOver()) {
+            return "gameOver"; // Redirect to a game over page or show the game over section
+        }
         return "game";
     }
 

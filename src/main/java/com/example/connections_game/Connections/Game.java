@@ -43,6 +43,9 @@ public class Game {
             // I want to return a seperate message though
             //throw new IllegalArgumentException("Guess must be four words" + "\n" + "Guess Again");
             getPlayer().decreaseLife();
+            if(getPlayer().getLives() < 1){
+                gameOver();
+            }
             return false;
         }
         String connection = currentPuzzle.isCorrect(lowerCaseGuess);
@@ -86,8 +89,8 @@ public class Game {
         return str.toString();
     }
     // need to figure out logic for this and get user input
-    private boolean gameOver() {
-        return true;
+    private void gameOver() {
+        this.gameOver = true;
     }
 
     // returns true if new puzzle
@@ -108,23 +111,4 @@ public class Game {
     public Player getPlayer() {
         return player;
     }
-
-    //    public static void main (String[] args){
-//        Game game = new Game("Raanan");
-//
-//        while (true) {
-//            System.out.println("Enter your guess (4 words separated by spaces): ");
-//            String input = scanner.nextLine();
-//            if (input.equalsIgnoreCase("EXIT")) {
-//                System.out.println("Thanks for playing! Goodbye!");
-//                break;
-//            }
-//            String[] words = input.split(" ");
-//            Set<String> guess = new HashSet<>();
-//            for (String word : words) {
-//                guess.add(word.trim());
-//            }
-//            game.guess(guess);
-//        }
-//    }
 }
