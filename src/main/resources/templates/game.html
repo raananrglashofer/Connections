@@ -2,25 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Connections Game</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
 <h1>Connections Game</h1>
 
-
-<p id="hintText">Hints: </p>
-<ul>
-    <li th:each="hint : ${gameState.hints}" th:text="${hint}"></li>
-</ul>
-
 <p>Words Left:</p>
-<ul>
-    <li th:each="word : ${gameState.wordsLeft}" th:text="${word}"></li>
-</ul>
-
-<p id="connectionText">Connections: </p>
-<ul>
-    <li th:each="connection : ${gameState.solvedConnections}" th:text="${connection}"></li>
-</ul>
+<div class="grid-container">
+    <div class="grid-item" th:each="word : ${gameState.wordsLeft}" th:text="${word}"></div>
+</div>
 
 <p>Lives Left: <span th:text="${gameState.livesLeft}"></span></p>
 <p>Hints Left: <span th:text="${gameState.hintsLeft}"></span></p>
@@ -34,6 +24,16 @@
 <form action="/game/hint" method="post">
     <button type="submit" id="hintButton">Get a Hint</button>
 </form>
+
+<p id="hintText">Hints: </p>
+<ul>
+    <li th:each="hint : ${gameState.hints}" th:text="${hint}"></li>
+</ul>
+
+<p id="connectionText">Connections: </p>
+<ul>
+    <li th:each="connection : ${gameState.solvedConnections}" th:text="${connection}"></li>
+</ul>
 
 </body>
 </html>
