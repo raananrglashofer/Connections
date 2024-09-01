@@ -17,4 +17,7 @@ public class Player {
     public int getLives(){
         return this.lives;
     }
+    public void resetLives(){
+        this.lives = 4;
+    }
 }

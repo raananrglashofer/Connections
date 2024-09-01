@@ -6,6 +6,12 @@
 <body>
 <h1>Game Over</h1>
 <p>Thank you for playing!</p>
+
+<p id="connectionText">Connections: </p>
+<ul>
+  <li th:each="connection : ${gameState.connections}" th:text="${connection}"></li>
+</ul>
+
 <form action="/game/start" method="post">
   <button type="submit">Play Again</button>
 </form>

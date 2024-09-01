@@ -11,6 +11,7 @@ public class GameState {
     private boolean gameOver;
     private Set<String> hints;
     private Set<Connection> solvedConnections;
+    private Set<Connection> connections;
 
     public GameState(Game game) {
         this.wordsLeft = game.getCurrentPuzzle().getWords();
@@ -19,6 +20,7 @@ public class GameState {
         this.gameOver = game.isGameOver();
         this.hints = game.getCurrentPuzzle().getHintsGiven();
         this.solvedConnections = game.getCurrentPuzzle().getSolvedConnections();
+        this.connections = game.getCurrentPuzzle().getConnections();
     }
 
     public void setWordsLeft(Set<String> wordsLeft) {
@@ -67,5 +69,13 @@ public class GameState {
 
     public void setSolvedConnections(Set<Connection> solvedConnections) {
         this.solvedConnections = solvedConnections;
+    }
+
+    public Set<Connection> getConnections() {
+        return connections;
+    }
+
+    public void setConnections(Set<Connection> connections) {
+        this.connections = connections;
     }
 }

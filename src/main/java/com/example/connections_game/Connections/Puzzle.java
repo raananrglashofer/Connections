@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Puzzle {
     private Set<String> words;
-    private List<Connection> connections;
+    private Set<Connection> connections;
     // hints are not given by difficulty for now - given out randomly
     private List<String> hints;
     private Set<Connection> solvedConnections = new HashSet<>();
@@ -11,7 +11,7 @@ public class Puzzle {
     public Puzzle(){
 
     }
-    public Puzzle(Set<String> words, List<Connection> connections, List<String> hints){
+    public Puzzle(Set<String> words, Set<Connection> connections, List<String> hints){
         this.words = words;
         this.connections = connections;
         this.hints = hints;
@@ -77,7 +77,7 @@ public class Puzzle {
         this.words = words;
     }
 
-    public void setConnections(List<Connection> connections) {
+    public void setConnections(Set<Connection> connections) {
         this.connections = connections;
     }
 
@@ -85,7 +85,7 @@ public class Puzzle {
         this.hints = hints;
     }
 
-    public List<Connection> getConnections() {
+    public Set<Connection> getConnections() {
         return connections;
     }
 

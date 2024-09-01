@@ -29,8 +29,10 @@ public class Game {
         while (!checkCached(newPuzzle)) {
             newPuzzle = puzzleGenerator.fetchNewPuzzle();
         }
+        this.gameOver = false;
         this.currentPuzzle = newPuzzle;
         cacheThePuzzle(newPuzzle);
+        getPlayer().resetLives();
         System.out.println("New Puzzle started!");
         System.out.println("Words to guess: " + currentPuzzle.getWords());
     }
