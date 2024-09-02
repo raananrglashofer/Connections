@@ -41,7 +41,6 @@ public class GameController {
         GameState gameState = new GameState(game);
         model.addAttribute("correct", correct);
         model.addAttribute("gameState", gameState);
-        System.out.println(gameState.isGameOver());
         if (gameState.isGameOver()) {
             return "gameOver"; // Redirect to a game over page or show the game over section
         }

@@ -30,7 +30,7 @@ public class PuzzleGenerator {
                     "  \"messages\": [{\"role\": \"system\", \"content\": \"Generate a puzzle with 16 words and " +
                     "their connections just like the new york times game connections and provide a hint for " +
                     "each connection. The game works that there are four groups of 4 words and each group is one word or" +
-                    "phrase connecting the four words. All 16 words should be one word max and in lowercase form. Please do it on medium mdoe" +
+                    "phrase connecting the four words. All 16 words should be one word max and in lowercase form. Please do it on medium mode" +
                     "Provide the response in JSON format with the following structure: " +
                     "'words' should be a set of 16 words. 'connections' should be an list of objects, where each object " +
                     "has two fields: 'words', which is a set of 4 words that form a group, and 'connection', which is a " +

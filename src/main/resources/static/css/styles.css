@@ -27,3 +27,7 @@ body {
     text-align: center;
     font-size: 18px;
 }
+
+.selected {
+    background-color: yellow; /* or any other color to highlight the selection */
+}

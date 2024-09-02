@@ -9,15 +9,14 @@
 
 <p>Words Left:</p>
 <div class="grid-container">
-    <div class="grid-item" th:each="word : ${gameState.wordsLeft}" th:text="${word}"></div>
+    <div class="grid-item" th:each="word : ${gameState.wordsLeft}" th:text="${word}"
+         th:attr="data-word=${word}" onclick="selectWord(this)"></div>
 </div>
 
 <p>Lives Left: <span th:text="${gameState.livesLeft}"></span></p>
 <p>Hints Left: <span th:text="${gameState.hintsLeft}"></span></p>
 
-<form action="/game/guess" method="post">
-    <label for="guess">Enter Your Guess (4 words separated by spaces):</label>
-    <input type="text" id="guess" name="guess" required>
+<form id="guessForm" action="/game/guess" method="post" onsubmit="return submitGuess()">
     <button type="submit">Submit Guess</button>
 </form>
 
@@ -34,6 +33,52 @@
 <ul>
     <li th:each="connection : ${gameState.solvedConnections}" th:text="${connection}"></li>
 </ul>
+
+<script>
+    let selectedWords = [];
+
+    function selectWord(wordDiv) {
+        const word = wordDiv.getAttribute('data-word');
+
+        if (selectedWords.includes(word)) {
+            selectedWords = selectedWords.filter(w => w !== word);
+            wordDiv.classList.remove('selected');
+        } else if (selectedWords.length < 4) {
+            selectedWords.push(word);
+            wordDiv.classList.add('selected');
+        }
+
+        console.log(selectedWords);
+    }
+
+function submitGuess() {
+    if (selectedWords.length === 4) {
+        // Get the form element
+        const form = document.getElementById('guessForm');
+
+        // Create the hidden input field
+        const guessInput = document.createElement('input');
+        guessInput.setAttribute('type', 'hidden');
+        guessInput.setAttribute('name', 'guess');
+        guessInput.setAttribute('value', selectedWords.join(' '));
+
+        // Append the hidden input field to the form
+        form.appendChild(guessInput);
+
+        // Allow the form to submit
+        return true;
+    } else {
+        alert('Please select exactly 4 words.');
+        return false;
+    }
+}
+
+
+    function clearSelections() {
+        selectedWords = [];
+        document.querySelectorAll('.grid-item.selected').forEach(item => item.classList.remove('selected'));
+    }
+</script>
 
 </body>
 </html>
